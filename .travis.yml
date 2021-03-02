@@ -12,3 +12,22 @@ before_install: # this contains a series of commands that gets executed before o
  
 script:       # anytime we run our test-suite on travis-Ci it assumes that our test suite runs and then exits automatically. but default "npm run test" command never exits util we press the q.it just 
   - docker run -e CI=true sriharsha786/docker-react npm run test    # hangs there util we hit the q. 
+
+
+deploy:
+  provider: elasticbeanstalk  # on which we are deploying  hosting provider
+  app: docker-react         #application name
+  env:  Dockerreact-env     # environment name actually app running inside the docker-react using it's  called as env 
+  region: ap-south-1
+  bucket_name: elasticbeanstalk-ap-south-1-534915205250
+  bucket_path: docker-react
+  on:
+    branch: master    # we are deploying whenever it code in master branch is changing.
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+
+
+
+
+    
+  
